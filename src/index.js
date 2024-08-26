@@ -39,8 +39,9 @@ const MORSE_TABLE = {
 
 function  decode(expr) {
     let result = '';
-    let buffer;
+    
     let digit11 = '';
+    MORSE_TABLE1 = {};
     
     // console.log(MORSE_TABLE);
     
@@ -54,21 +55,21 @@ function  decode(expr) {
             }
             
             digit11 = ('0000000000' + digit11).slice(-10);
-        buffer = MORSE_TABLE[key];
-        MORSE_TABLE[digit11] = buffer;
-        delete MORSE_TABLE[key];
-        digit11 = '';
+            // buffer = MORSE_TABLE[key];
+            MORSE_TABLE1[digit11] = MORSE_TABLE[key];
+            // delete MORSE_TABLE[key];
+            digit11 = '';
     }
     
-    MORSE_TABLE["**********"] = ' ';
+    MORSE_TABLE1["**********"] = ' ';
 
     for (let i = 0; i <= expr.length - 1; i+=10) 
     {
-        for (const key in MORSE_TABLE) 
+        for (const key in MORSE_TABLE1) 
         {
             if (expr.slice(i, i + 10) == key) 
             {
-                result += MORSE_TABLE[key];
+                result += MORSE_TABLE1[key];
             }
         }
     }
